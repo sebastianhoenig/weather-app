@@ -4,10 +4,30 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Document</title>
   </head>
   <body>
-    <div id="content"></div>
+    <div id="inputs">
+      <input
+        type="text"
+        name="city-input"
+        id="city-input"
+        placeholder="Enter city name..."
+      />
+      <button id="submit-city">Search</button>
+    </div>
+    <div id="currentDay">
+      <div id="name"></div>
+      <div id="dayName"></div>
+      <div class="descriptionDiv">
+        <img src="" alt="" id="icon" />
+      </div>
+      <div id="temp"></div>
+      <div id="humidity"></div>
+      <div id="windSpeed"></div>
+    </div>
+    <div id="forecast"></div>
     <script src="main.js"></script>
   </body>
 </html>
