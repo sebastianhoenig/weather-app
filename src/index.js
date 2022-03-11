@@ -1,1 +1,3 @@
-console.log("Test");
+import { callWeatherData } from "./script";
+
+callWeatherData("Frankfurt");
