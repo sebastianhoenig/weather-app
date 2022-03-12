@@ -29,7 +29,7 @@ async function callForecastData(lat, lon, city) {
     const data = await response.json();
     addForecast(data, city);
   } catch (error) {
-    console.log("Something went wrong: " + error);
+    console.log("Something went wrong: 2" + error);
   }
 }
 
@@ -45,6 +45,7 @@ function makeObject(data) {
   let country = data.sys.country;
   let icon = data.weather[0].icon;
   let offset = data.timezone;
+  let feelsLike = data.main.feels_like;
   let city = new City(
     lat,
     lon,
@@ -56,7 +57,8 @@ function makeObject(data) {
     name,
     country,
     icon,
-    offset
+    offset,
+    feelsLike
   );
   callForecastData(lat, lon, city);
 }
@@ -81,16 +83,14 @@ function addForecast(data, city) {
 }
 
 function renderCurrentDay(city) {
-  const currentDayDiv = document.getElementById("currentDay");
+  const content = document.getElementById("content");
+  const forecast = document.getElementById("forecast");
   const tempDiv = document.getElementById("temp");
-  const humidityDiv = document.getElementById("humidity");
   const windSpeedDiv = document.getElementById("windSpeed");
   const nameDiv = document.getElementById("name");
-  const countryDiv = document.getElementById("country");
   const icon = document.getElementById("icon");
-  tempDiv.textContent = city.getTemperature() + "° C, " + city.getDescription();
-  humidityDiv.textContent = "Humidity: " + city.getHumidity() + " %";
-  windSpeedDiv.textContent = "Wind Speed: " + city.getWindSpeed() + " km/h";
+  tempDiv.innerHTML = `Feels like: <br> <i class="fa-solid fa-temperature-high"></i> ${city.getTemperature()} ° C`;
+  windSpeedDiv.innerHTML = `Wind speed: <br> <i class="fa-solid fa-wind"></i>  ${city.getWindSpeed()} km/h`;
   nameDiv.textContent = city.getCity() + ", " + city.getCountry();
   icon.src = city.getIcon();
   const dayName = document.getElementById("dayName");
@@ -116,17 +116,11 @@ function renderForecast(city) {
   }
 }
 
-const button = document.getElementById("submit-city");
-button.addEventListener("click", () => {
+const button = document.getElementById("inputs");
+button.addEventListener("submit", (e) => {
+  e.preventDefault();
   let input = document.getElementById("city-input").value;
   callWeatherData(input);
 });
 
-export {
-  callWeatherData,
-  callForecastData,
-  renderCurrentDay,
-  renderForecast,
-  addForecast,
-  makeObject,
-};
+export { callWeatherData };

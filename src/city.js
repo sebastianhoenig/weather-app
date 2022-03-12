@@ -12,7 +12,8 @@ class City {
     name,
     country,
     icon,
-    offset
+    offset,
+    feelsLike
   ) {
     this.longitude = lon;
     this.latitude = lat;
@@ -25,11 +26,16 @@ class City {
     this.country = country;
     this.icon = icon;
     this.offset = offset;
+    this.feelsLike = feelsLike;
     this.forecast;
   }
 
   getTemperature() {
     return (Math.round((this.temperature - 273.15) * 100) / 100).toFixed(0);
+  }
+
+  getFeelsLike() {
+    return (Math.round((this.feelsLike - 273.15) * 100) / 100).toFixed(0);
   }
 
   getLongitude() {
