@@ -4,7 +4,7 @@ import { Day } from "./forecast";
 async function callWeatherData(city) {
   try {
     const response = await fetch(
-      "http://api.openweathermap.org/data/2.5/weather?q=" +
+      "https://api.openweathermap.org/data/2.5/weather?q=" +
         city +
         "&APPID=2721941ff1d23996817409883d4be5dd",
       { mode: "cors" }
@@ -19,7 +19,7 @@ async function callWeatherData(city) {
 async function callForecastData(lat, lon, city) {
   try {
     const response = await fetch(
-      "http://api.openweathermap.org/data/2.5/onecall?lon=" +
+      "https://api.openweathermap.org/data/2.5/onecall?lon=" +
         lon +
         "&lat=" +
         lat +
@@ -85,11 +85,13 @@ function addForecast(data, city) {
 function renderCurrentDay(city) {
   const content = document.getElementById("content");
   const forecast = document.getElementById("forecast");
+  const currTemp = document.getElementById("descDiv");
   const tempDiv = document.getElementById("temp");
   const windSpeedDiv = document.getElementById("windSpeed");
   const nameDiv = document.getElementById("name");
   const icon = document.getElementById("icon");
-  tempDiv.innerHTML = `Feels like: <br> <i class="fa-solid fa-temperature-high"></i> ${city.getTemperature()} ° C`;
+  currTemp.textContent = city.getTemperature() + " ° C";
+  tempDiv.innerHTML = `Feels like: <br> <i class="fa-solid fa-temperature-high"></i> ${city.getFeelsLike()} ° C`;
   windSpeedDiv.innerHTML = `Wind speed: <br> <i class="fa-solid fa-wind"></i>  ${city.getWindSpeed()} km/h`;
   nameDiv.textContent = city.getCity() + ", " + city.getCountry();
   icon.src = city.getIcon();
