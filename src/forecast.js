@@ -47,7 +47,7 @@ class Day {
   }
 
   getIcon() {
-    return "http://openweathermap.org/img/wn/" + this.icon + "@2x.png";
+    return "https://openweathermap.org/img/wn/" + this.icon + "@2x.png";
   }
 }
 
